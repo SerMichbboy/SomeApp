@@ -1,4 +1,3 @@
-# users/serializers.py
 from rest_framework import serializers
 from .models import CustomUser
 
@@ -12,5 +11,5 @@ class CustomUserSerializer(serializers.ModelSerializer):
             'first_name', 
             'last_name', 
             'date_of_birth', 
-            'phone_number'
-            ]  
+            'phone_number',
+        ]  

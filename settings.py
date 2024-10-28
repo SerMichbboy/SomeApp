@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     'images',
     'authtorize',
     'users',
+    # 'users.apps.UsersConfig',
+    # 'authtorize.apps.AuthConfig',
+    # 'images.apps.ImagesConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -89,6 +93,8 @@ DATABASES = {
     }
 }
 
+RABBITMQ_HOST = 'localhost'
+RABBITMQ_QUEUE = 'image_events'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

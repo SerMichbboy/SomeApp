@@ -1,10 +1,11 @@
-# views.py
+from django.http import FileResponse
+import os
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Image
 from .serializers import ImageSerializer
-from .services import process_image 
+from .services import process_image
 
 class ImageView(APIView):
     def post(self, request):
@@ -16,26 +17,35 @@ class ImageView(APIView):
             )
         # Обработка изображения
         image_instance, resized_images = process_image(file)
+
         # Сохраняем оригинальное изображение
-        image_instance.name = request.data.get(
-            'name',
-            'Untitled'
-        )
-        image_instance.path = file.name  # Путь к файлу
+        image_instance.title = request.data.get('name', 'Untitled') 
+        image_instance.file_path = file.name 
         image_instance.save()
+
         return Response(
             ImageSerializer(image_instance).data,
             status=status.HTTP_201_CREATED
         )
 
     def get(self, request, pk=None):
-        if pk:  # Если указан ID, вернуть конкретное изображение
+        if pk:  # Если указан ID, возвращаем файл
             try:
                 image = Image.objects.get(pk=pk)
             except Image.DoesNotExist:
                 return Response(status=status.HTTP_404_NOT_FOUND)
-            serializer = ImageSerializer(image)
-            return Response(serializer.data)
+
+            # Путь к файлу изображения
+            file_path = image.file_path  # Здесь предполагается, что path хранит путь к файлу
+
+            # Проверяем, существует ли файл
+            if not os.path.exists(file_path):
+                return Response(status=status.HTTP_404_NOT_FOUND)
+
+            # Возвращаем файл
+            response = FileResponse(open(file_path, 'rb'))
+            response['Content-Disposition'] = f'attachment; filename="{os.path.basename(file_path)}"'
+            return response
         else:  # Если ID не указан, вернуть список всех изображений
             images = Image.objects.all()
             serializer = ImageSerializer(images, many=True)

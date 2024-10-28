@@ -1,30 +1,37 @@
-from PIL import Image as PilImage
-from io import BytesIO
-from django.core.files.base import ContentFile
-from django.utils import timezone 
-from .models import Image
+from PIL import Image as PILImage
 import os
 
-def process_image(file):
-    img = PilImage.open(file)
+def process_image(file, title):
+    # Создаем директорию uploads, если она не существует
+    upload_dir = 'images/images_objs'
+    if not os.path.exists(upload_dir):
+        os.makedirs(upload_dir)
 
-    # Преобразуем в оттенки серого
-    img_gray = img.convert('L')
+    # Открываем изображение
+    image = PILImage.open(file)
 
-    # Определяем размеры для изменения
-    sizes = [(100, 100), (500, 500)]
-    resized_images = {}
+    # Получение метаданных
+    size = image.size
+    resolution = f"{size[0]}x{size[1]}"
+    image_size = file.size  # Получаем размер файла в байтах
+    image_format = image.format  # Получаем формат изображения
+    mode = image.mode  # Получаем режим изображения (например, RGB, L, и т.д.)
 
-    for size in sizes:
-        img_resized = img_gray.resize(size)
-        buffered = BytesIO()
-        img_resized.save(buffered, format=file.content_type.split('/')[-1])
-        resized_images[size] = ContentFile(buffered.getvalue(), name=f"{os.path.splitext(file.name)[0]}_{size[0]}x{size[1]}.{file.content_type.split('/')[-1]}")
+    # Преобразование изображения в оттенки серого
+    gray_image = image.convert('L')
 
-    # Сохраняем метаданные
-    image_instance = Image()
-    image_instance.upload_date = timezone.now()  # Устанавливаем дату загрузки
-    image_instance.resolution = f"{img.width}x{img.height}"
-    image_instance.size = file.size
+    # Сохраняем изображение в оттенках серого
+    gray_file_path = os.path.join(upload_dir, f'gray_{file.name}')
+    gray_image.save(gray_file_path)
 
-    return image_instance, resized_images
+    # Создаем объект изображения с метаданными
+    image_instance = {
+        'title': title,
+        'file_path': gray_file_path,  # Сохраняем путь к изображению в оттенках серого
+        'resolution': resolution,
+        'size': image_size,
+        'format': image_format,  # Добавляем формат изображения
+        'mode': mode,  # Добавляем режим изображения
+    }
+
+    return image_instance

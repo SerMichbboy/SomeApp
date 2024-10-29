@@ -2,18 +2,18 @@ import os
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import Image
+from images.models import Image
 from .serializers import ImageSerializer
 from django.http import FileResponse
 from .services import process_image 
 from rest_framework.permissions import IsAuthenticated
-from utils.rabbitmq.rabbitmq import send_rabbitmq_message 
+# from utils.rabbitmq.rabbitmq import send_rabbitmq_message 
 
 class ImageView(APIView):
     '''
         Въюсет по работе с изображениями.        
     '''
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def post(self, request):
         file = request.FILES.get('image')
@@ -21,7 +21,7 @@ class ImageView(APIView):
             return Response({"error": "No image provided."}, status=status.HTTP_400_BAD_REQUEST)
         
         # Обработка изображения
-        image_instance = process_image(file, request.data.get('name', 'Untitled'))
+        image_instance = process_image(file)
         
         # Сохраняем объект изображения в базе данных
         image_instance_model = Image(

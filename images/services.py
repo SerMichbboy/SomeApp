@@ -1,7 +1,7 @@
 from PIL import Image as PILImage
 import os
 
-def process_image(file, title):
+def process_image(file):
     # Создаем директорию uploads, если она не существует
     upload_dir = 'images/images_objs'
     if not os.path.exists(upload_dir):
@@ -9,6 +9,14 @@ def process_image(file, title):
 
     # Открываем изображение
     image = PILImage.open(file)
+
+    # Обрезка изображения до квадратного формата 1:1 (по центру)
+    min_side = min(image.size)  # Находим минимальную сторону для обрезки
+    left = (image.width - min_side) // 2
+    top = (image.height - min_side) // 2
+    right = left + min_side
+    bottom = top + min_side
+    image = image.crop((left, top, right, bottom))
 
     # Получение метаданных
     size = image.size
@@ -26,7 +34,7 @@ def process_image(file, title):
 
     # Создаем объект изображения с метаданными
     image_instance = {
-        'title': title,
+        'title': str(file),
         'file_path': gray_file_path,  # Сохраняем путь к изображению в оттенках серого
         'resolution': resolution,
         'size': image_size,

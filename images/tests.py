@@ -28,22 +28,21 @@ class TestImageViewSet:
         with open('images/images_objs/test_image.jpg', 'rb') as image_file:
             data = {
                 'image': image_file,
-                'title': 'test_image'
             }
-            response = self.client.post(reverse('image-list-create'), data)
+            response = self.client.post(reverse('image-list-create'), data, format='multipart')
             assert response.status_code == status.HTTP_201_CREATED
-            assert Image.objects.filter(title='Test image').exists()  # Проверка, что изображение создано
+            assert Image.objects.filter(title='test_image.jpg').exists()  # Проверка, что изображение создано
 
     def test_retrieve_image(self):
         # Проверка получения конкретного изображения
-        image = Image.objects.create(image='path/to/your/test/image.jpg', title='Test image')
-        response = self.client.get(reverse('image-detail', args=[image.id]))
+        image = Image.objects.filter(title='test_image.jpg').get()
+        response = self.client.get(reverse('image-list-create', args=[image.pk]))
         assert response.status_code == status.HTTP_200_OK
         assert response.data['title'] == image.title  # Проверка правильности данных
 
     def test_update_image(self):
         # Проверка обновления изображения
-        image = Image.objects.create(image='path/to/your/test/image.jpg', title='Test image')
+        image = Image.objects.filter(title='test_image.jpg').first()
         new_data = {
             'title': 'Updated image description'
         }
@@ -54,7 +53,7 @@ class TestImageViewSet:
 
     def test_delete_image(self):
         # Проверка удаления изображения
-        image = Image.objects.create(image='path/to/your/test/image.jpg', title='Test image')
+        image = Image.objects.filter(title='test_image.jpg').first()
         response = self.client.delete(reverse('image-detail', args=[image.id]))
         assert response.status_code == status.HTTP_204_NO_CONTENT
         assert not Image.objects.filter(id=image.id).exists()  # Проверка, что изображение удалено

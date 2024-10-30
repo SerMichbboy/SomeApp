@@ -14,7 +14,7 @@ class ImageView(APIView):
     '''
         Въюсет по работе с изображениями.        
     '''
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         file = request.FILES.get('image')

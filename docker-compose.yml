@@ -19,8 +19,12 @@ services:
       - "8000:8000"
     depends_on:
       - db
+      - rabbitmq  # Добавлено для зависимости от RabbitMQ
     command: >
       bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    environment:
+      - ALLOWED_HOSTS=127.0.0.1,localhost
+      - DEBUG=True
 
 volumes:
-  postgres_data:
+  postgres_data: 

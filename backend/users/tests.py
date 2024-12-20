@@ -2,7 +2,7 @@ import pytest
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
-from users.models import CustomUser
+from users import CustomUser
 
 @pytest.mark.django_db
 class TestCustomUserViewSet:

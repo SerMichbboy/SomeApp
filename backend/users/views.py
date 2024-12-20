@@ -1,14 +1,16 @@
+import logging
+
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
 from .models import CustomUser
 from .serializers import CustomUserSerializer
 
+
 class CustomUserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
 
-    # Метод для получения всех пользователей (GET /api/users/)
     def list(self, request):
         users = self.queryset
         serializer = self.get_serializer(users, many=True)
@@ -26,7 +28,11 @@ class CustomUserViewSet(viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({
+            'data': serializer.errors,
+            "error": "Invalid data",
+            "details": serializer.errors
+        }, status=status.HTTP_400_BAD_REQUEST)
 
     # Метод для обновления данных пользователя (PUT /api/users/<id>/)
     def update(self, request, pk=None):

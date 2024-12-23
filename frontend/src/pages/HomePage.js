@@ -7,7 +7,6 @@ function HomePage() {
     <div className="home-container">
       <div className="home-header">
         <Link to="/register_page" className="btn-register">Go to Register</Link>
-        <Link to="/users_list" className="btn-users">User List</Link>
       </div>
 
       <div className="home-content">

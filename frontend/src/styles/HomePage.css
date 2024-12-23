@@ -50,13 +50,29 @@
   color: #007bff;
 }
 
-/* Описание */
 .description {
   font-size: 1.2rem;
   color: #555;
   text-align: center;
   margin-top: 20px;
-  animation: fadeIn 2s ease-in-out 1s;
+  opacity: 0;
+  visibility: hidden;
+  will-change: opacity, transform;
+  animation: fadeInDescription 2s ease-in-out 1s forwards;
+}
+
+
+/* Анимация для описания */
+@keyframes fadeInDescription {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+  }
 }
 
 /* Анимация для мячиков */
@@ -65,7 +81,7 @@
   justify-content: space-around;
   width: 100%;
   position: absolute;
-  bottom: 20px;
+  bottom: 250px;
   left: 0;
 }
 

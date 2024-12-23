@@ -12,9 +12,8 @@ class CustomUserViewSet(viewsets.ModelViewSet):
     serializer_class = CustomUserSerializer
 
     def list(self, request):
-        users = self.queryset
+        users = self.get_queryset()
         serializer = self.get_serializer(users, many=True)
-        print(len(serializer.data))
         return Response(serializer.data)
     
     # Метод для получения пользователя по ID (GET /api/users/<id>/)

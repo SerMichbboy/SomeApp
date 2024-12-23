@@ -1,11 +1,30 @@
 import React from "react";
-import RegistrationForm from "./components/users/RegistrationForm";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import UsersListPage from "./pages/UsersListPage";
+import RegisterPage from "./pages/RegisterPage";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <div className="App">
-      <RegistrationForm />
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar />
+        <Routes>
+          {/* Главная страница */}
+          <Route path="/main" element={<HomePage />} />
+
+          {/* Страница со списком пользователей */}
+          <Route path="/users_list" element={<UsersListPage />} />
+
+          {/* Страница регистрации */}
+          <Route path="/register_page" element={<RegisterPage />} />
+
+          {/* Редирект на главную страницу по умолчанию */}
+          <Route path="/" element={<Navigate to="/main" />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import '../styles/RegisterPage.css';
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -57,7 +58,7 @@ const RegistrationForm = () => {
             value={formData.username}
             onChange={handleChange}
             required
-            style={{ width: "100%", padding: "8px" }}
+            className="form-input"
           />
         </label>
         <label>
@@ -68,7 +69,7 @@ const RegistrationForm = () => {
             value={formData.password}
             onChange={handleChange}
             required
-            style={{ width: "100%", padding: "8px" }}
+            className="form-input"
           />
         </label>
         <label>
@@ -78,7 +79,7 @@ const RegistrationForm = () => {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            style={{ width: "100%", padding: "8px" }}
+            className="form-input"
           />
         </label>
         <label>
@@ -88,7 +89,7 @@ const RegistrationForm = () => {
             name="first_name"
             value={formData.first_name}
             onChange={handleChange}
-            style={{ width: "100%", padding: "8px" }}
+            className="form-input"
           />
         </label>
         <label>
@@ -98,7 +99,7 @@ const RegistrationForm = () => {
             name="last_name"
             value={formData.last_name}
             onChange={handleChange}
-            style={{ width: "100%", padding: "8px" }}
+            className="form-input"
           />
         </label>
         <label>
@@ -108,7 +109,7 @@ const RegistrationForm = () => {
             name="date_of_birth"
             value={formData.date_of_birth}
             onChange={handleChange}
-            style={{ width: "100%", padding: "8px" }}
+            className="form-input"
           />
         </label>
         <label>
@@ -118,7 +119,7 @@ const RegistrationForm = () => {
             name="phone_number"
             value={formData.phone_number}
             onChange={handleChange}
-            style={{ width: "100%", padding: "8px" }}
+            className="form-input"
           />
         </label>
         <label>
@@ -128,7 +129,7 @@ const RegistrationForm = () => {
             name="address"
             value={formData.address}
             onChange={handleChange}
-            style={{ width: "100%", padding: "8px" }}
+            className="form-input"
           />
         </label>
         <label>
@@ -138,7 +139,7 @@ const RegistrationForm = () => {
             value={formData.bio}
             onChange={handleChange}
             rows="3"
-            style={{ width: "100%", padding: "8px" }}
+            className="form-input"
           />
         </label>
         <label>
@@ -148,11 +149,11 @@ const RegistrationForm = () => {
             name="website"
             value={formData.website}
             onChange={handleChange}
-            style={{ width: "100%", padding: "8px" }}
+            className="form-input"
           />
         </label>
-        <button type="reset" style={{ padding: "10px", backgroundColor: "#f5f5f5", border: "1px solid #ccc" }}>Clear</button>
-        <button type="submit" style={{ padding: "10px", backgroundColor: "#007bff", color: "white", border: "none" }}>Register</button>
+        <button type="reset" className="btn-register">Очистить</button>
+        <button type="submit" className="btn-register">Регистрация</button>
       </form>
       {message && <p style={{ textAlign: "center", marginTop: "10px", color: message.includes("Error") ? "red" : "green" }}>{message}</p>}
     </div>

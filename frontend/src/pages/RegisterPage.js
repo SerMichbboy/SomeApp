@@ -1,11 +1,21 @@
 import React from "react";
-import RegistrationForm from "../components/users/RegistrationForm"; // Путь к компоненту формы регистрации
+import { useNavigate } from "react-router-dom";
+import RegistrationForm from "./RegistrationForm";
+import '../styles/RegisterPage.css';
 
 function RegisterPage() {
+  const navigate = useNavigate();
+
+  const handleGoHome = () => {
+    navigate("/");
+  };
+
   return (
     <div>
-      <h1>Register New User</h1>
       <RegistrationForm />
+      <button className="btn-home" onClick={handleGoHome}>
+        Go to Home
+      </button>
     </div>
   );
 }

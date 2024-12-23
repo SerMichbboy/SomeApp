@@ -25,10 +25,12 @@
 
 .btn-register, .btn-users {
   padding: 10px 20px;
+  margin: 10px auto;
   background-color: #007bff;
   color: white;
+  display: block;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 10px;
   font-size: 16px;
   transition: background-color 0.3s ease;
 }
@@ -90,7 +92,7 @@
   height: 20px;
   border-radius: 50%;
   background-color: #007bff;
-  animation: bounce 1s ease-in-out infinite;
+  animation: bounce 2s ease-in-out infinite;
 }
 
 .ball:nth-child(1) {

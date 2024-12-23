@@ -6,7 +6,8 @@ function HomePage() {
   return (
     <div className="home-container">
       <div className="home-header">
-        <Link to="/register_page" className="btn-register">Go to Register</Link>
+        <Link to="/register_page" className="btn-register">Зарегистрироваться</Link>
+        <Link to="/login_page" className="btn-register">Войти</Link>
       </div>
 
       <div className="home-content">

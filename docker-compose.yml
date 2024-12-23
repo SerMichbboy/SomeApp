@@ -1,4 +1,5 @@
 version: "3.8"
+
 services:
   db:
     image: postgres:latest
@@ -28,6 +29,8 @@ services:
     depends_on:
       - db
       - rabbitmq
+    volumes:
+      - ./backend:/app
     command: >
       bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     environment:
@@ -41,6 +44,11 @@ services:
       - "3000:3000"
     depends_on:
       - web
+    volumes:
+      - ./frontend:/app
+    command: npm start
+    environment:
+      - CHOKIDAR_USEPOLLING=true
 
 volumes:
   postgres_data:

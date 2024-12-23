@@ -3,19 +3,17 @@ import axios from "axios";
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
-    username: "szfsdgdf",
-    password: "szfsdgdf",
-    email: "dfhfsh@sdgd.fdsf",
-    first_name: "sdgdfghdf",
-    last_name: "sdgdsfg",
-    date_of_birth: "12/31/2222",
-    phone_number: "1242235346",
-    address: "esdg",
-    bio: "Lalalal",
-    website: "http://vk.com/",
+    username: "",
+    password: "",
+    email: "",
+    first_name: "",
+    last_name: "",
+    date_of_birth: "",
+    phone_number: "",
+    address: "",
+    bio: "",
+    website: "",
   });
-
-  console.log(1131232)
 
   const [message, setMessage] = useState("");
 
@@ -26,98 +24,137 @@ const RegistrationForm = () => {
     });
   };
 
+  const api = axios.create({
+    baseURL: "http://127.0.0.1:8000/api/",
+  });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/users/", formData);
+      const response = await api.post("users/", formData);
       setMessage("User registered successfully!");
       console.log(response);
     } catch (error) {
-      setMessage("Error: " + JSON.stringify(error.response.data));
-      console.error(error.response.data);
+      if (error.response) {
+        setMessage("Error: " + JSON.stringify(error.response.data));
+        console.error(error.response.data);
+      } else {
+        setMessage("Error: " + error.message);
+        console.error(error.message);
+      }
     }
   };
 
   return (
-    <div>
-      <h1>User Registration</h1>
-      <form onSubmit={handleSubmit}>
-        <input
+    <div style={{ maxWidth: "400px", margin: "0 auto", padding: "20px", fontFamily: "Arial, sans-serif" }}>
+      <h1 style={{ textAlign: "center" }}>User Registration</h1>
+      <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+        <label>
+          Username:
+          <input
             type="text"
             name="username"
-            placeholder="Username"
             value={formData.username}
             onChange={handleChange}
             required
-        />
-        <input
+            style={{ width: "100%", padding: "8px" }}
+          />
+        </label>
+        <label>
+          Password:
+          <input
             type="password"
             name="password"
-            placeholder="Password"
             value={formData.password}
             onChange={handleChange}
             required
-        />
-        <input
+            style={{ width: "100%", padding: "8px" }}
+          />
+        </label>
+        <label>
+          Email:
+          <input
             type="email"
             name="email"
-            placeholder="Email"
             value={formData.email}
             onChange={handleChange}
-        />
-        <input
+            style={{ width: "100%", padding: "8px" }}
+          />
+        </label>
+        <label>
+          First Name:
+          <input
             type="text"
             name="first_name"
-            placeholder="First Name"
             value={formData.first_name}
             onChange={handleChange}
-        />
-        <input
+            style={{ width: "100%", padding: "8px" }}
+          />
+        </label>
+        <label>
+          Last Name:
+          <input
             type="text"
             name="last_name"
-            placeholder="Last Name"
             value={formData.last_name}
             onChange={handleChange}
-        />
-        <input
+            style={{ width: "100%", padding: "8px" }}
+          />
+        </label>
+        <label>
+          Date of Birth:
+          <input
             type="date"
             name="date_of_birth"
-            placeholder="Date of Birth"
             value={formData.date_of_birth}
             onChange={handleChange}
-        />
-        <input
+            style={{ width: "100%", padding: "8px" }}
+          />
+        </label>
+        <label>
+          Phone Number:
+          <input
             type="text"
             name="phone_number"
-            placeholder="Phone Number"
             value={formData.phone_number}
             onChange={handleChange}
-        />
-        <input
+            style={{ width: "100%", padding: "8px" }}
+          />
+        </label>
+        <label>
+          Address:
+          <input
             type="text"
             name="address"
-            placeholder="Address"
             value={formData.address}
             onChange={handleChange}
-        />
-        <input
-            type="text"
+            style={{ width: "100%", padding: "8px" }}
+          />
+        </label>
+        <label>
+          Bio:
+          <textarea
             name="bio"
-            placeholder="Bio"
             value={formData.bio}
             onChange={handleChange}
-        />
-        <input
+            rows="3"
+            style={{ width: "100%", padding: "8px" }}
+          />
+        </label>
+        <label>
+          Website:
+          <input
             type="url"
             name="website"
-            placeholder="Website"
             value={formData.website}
             onChange={handleChange}
-        />
-        <button type="reset">Clear</button>
-        <button type="submit">Register</button>
+            style={{ width: "100%", padding: "8px" }}
+          />
+        </label>
+        <button type="reset" style={{ padding: "10px", backgroundColor: "#f5f5f5", border: "1px solid #ccc" }}>Clear</button>
+        <button type="submit" style={{ padding: "10px", backgroundColor: "#007bff", color: "white", border: "none" }}>Register</button>
       </form>
-      {message && <p>{message}</p>}
+      {message && <p style={{ textAlign: "center", marginTop: "10px", color: message.includes("Error") ? "red" : "green" }}>{message}</p>}
     </div>
   );
 };

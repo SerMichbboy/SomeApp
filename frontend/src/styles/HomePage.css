@@ -1,0 +1,111 @@
+/* Основной контейнер */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f4f6f9;
+  font-family: 'Arial', sans-serif;
+  position: relative;
+}
+
+/* Заголовок и описание */
+.home-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.btn-register, .btn-users {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-register:hover, .btn-users:hover {
+  background-color: #0056b3;
+}
+
+/* Стилизуем текст */
+.welcome-text {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.app-name {
+  color: #007bff;
+}
+
+/* Описание */
+.description {
+  font-size: 1.2rem;
+  color: #555;
+  text-align: center;
+  margin-top: 20px;
+  animation: fadeIn 2s ease-in-out 1s;
+}
+
+/* Анимация для мячиков */
+.animation {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+}
+
+.ball {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #007bff;
+  animation: bounce 1s ease-in-out infinite;
+}
+
+.ball:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.ball:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.ball:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* Анимации */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}

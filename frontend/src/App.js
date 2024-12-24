@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import UsersListPage from "./pages/UsersListPage";
 import RegisterPage from "./pages/RegisterPage";
 import Navbar from "./components/Navbar";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
 
           {/* Страница со списком пользователей */}
           <Route path="/users_list" element={<UsersListPage />} />
+
+          {/* Страница входа */}
+          <Route path="/login_page" element={<LoginPage />} />
 
           {/* Страница регистрации */}
           <Route path="/register_page" element={<RegisterPage />} />

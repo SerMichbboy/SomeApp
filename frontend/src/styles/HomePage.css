@@ -45,11 +45,24 @@
   font-weight: bold;
   color: #333;
   text-align: center;
+  user-select: none;
   animation: fadeIn 2s ease-in-out;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.welcome-text:hover {
+  transform: scale(1.1); /* Увеличение текста */
+  color: #007bff; /* Изменение цвета текста */
 }
 
 .app-name {
   color: #007bff;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.app-name:hover {
+  transform: scale(1.2); /* Увеличение текста больше, чем у родительского */
+  color: #0056b3; /* Изменение цвета */
 }
 
 .description {
@@ -61,8 +74,13 @@
   visibility: hidden;
   will-change: opacity, transform;
   animation: fadeInDescription 2s ease-in-out 1s forwards;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
+.description:hover {
+  transform: scale(1.1); /* Увеличение текста */
+  color: #333; /* Изменение цвета текста */
+}
 
 /* Анимация для описания */
 @keyframes fadeInDescription {

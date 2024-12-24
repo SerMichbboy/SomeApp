@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../styles/LoginPage.css";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const LoginPage = () => {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext); // Подключаем функцию login из AuthContext
 
   const handleGoHome = () => {
     navigate("/");
@@ -17,7 +19,6 @@ const LoginPage = () => {
     }
   };
 
-  // Эффект для добавления обработчика клавиш при монтировании компонента
   useEffect(() => {
     window.addEventListener("keydown", handleKeyPress);
     return () => {
@@ -25,8 +26,7 @@ const LoginPage = () => {
     };
   }, []);
 
-  // Функция обработки входа
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
 
     if (!identifier || !password) {
@@ -34,30 +34,37 @@ const LoginPage = () => {
       return;
     }
 
-    const loginData = { identifier, password };
+    const loginData = {
+      username: identifier, // Убедитесь, что бэкенд ожидает это поле.
+      password
+    };
 
-    // Пример отправки данных на сервер
-    fetch("/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(loginData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          alert("Login successful!");
-          // Перенаправление на другую страницу
-          window.location.href = "/dashboard";
-        } else {
-          alert(data.message || "Login failed. Please try again.");
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        alert("Something went wrong. Please try again later.");
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/token/create/", { // Используем правильный адрес бэкенда.
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(loginData),
       });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || "Login failed");
+      }
+
+      const data = await response.json();
+      const { access, refresh } = data;
+
+      // Сохраняем токены через AuthContext
+      login(access, refresh);
+
+      alert("Login successful!");
+      navigate("/main");
+    } catch (error) {
+      console.error("Error:", error);
+      alert(error.message || "Login failed. Please try again.");
+    }
   };
 
   return (

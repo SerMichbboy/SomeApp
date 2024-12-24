@@ -72,6 +72,7 @@
   margin-top: 20px;
   opacity: 0;
   visibility: hidden;
+  user-select: none;
   will-change: opacity, transform;
   animation: fadeInDescription 2s ease-in-out 1s forwards;
   transition: transform 0.3s ease, color 0.3s ease;
@@ -144,4 +145,25 @@
   50% {
     transform: translateY(-20px);
   }
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+}
+
+.btn-logout {
+  padding: 5px 10px;
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-logout:hover {
+  background-color: #d9363e;
 }

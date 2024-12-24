@@ -152,7 +152,6 @@ const RegistrationForm = () => {
             className="form-input"
           />
         </label>
-        <button type="reset" className="btn-register">Очистить</button>
         <button type="submit" className="btn-register">Регистрация</button>
       </form>
       {message && <p style={{ textAlign: "center", marginTop: "10px", color: message.includes("Error") ? "red" : "green" }}>{message}</p>}

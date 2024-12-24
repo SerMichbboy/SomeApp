@@ -7,7 +7,7 @@ const LoginPage = () => {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext); // Подключаем функцию login из AuthContext
+  const { login } = useContext(AuthContext);
 
   const handleGoHome = () => {
     navigate("/");
@@ -40,7 +40,9 @@ const LoginPage = () => {
     };
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/token/create/", { // Используем правильный адрес бэкенда.
+      const response = await fetch(
+          "http://127.0.0.1:8000/api/token/create/",
+          {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -56,10 +58,8 @@ const LoginPage = () => {
       const data = await response.json();
       const { access, refresh } = data;
 
-      // Сохраняем токены через AuthContext
       login(access, refresh);
 
-      alert("Login successful!");
       navigate("/main");
     } catch (error) {
       console.error("Error:", error);

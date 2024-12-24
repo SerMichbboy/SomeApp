@@ -39,7 +39,6 @@
   background-color: #0056b3;
 }
 
-/* Стилизуем текст */
 .welcome-text {
   font-size: 3rem;
   font-weight: bold;
@@ -51,8 +50,8 @@
 }
 
 .welcome-text:hover {
-  transform: scale(1.1); /* Увеличение текста */
-  color: #007bff; /* Изменение цвета текста */
+  transform: scale(1.1);
+  color: #007bff;
 }
 
 .app-name {
@@ -61,8 +60,8 @@
 }
 
 .app-name:hover {
-  transform: scale(1.2); /* Увеличение текста больше, чем у родительского */
-  color: #0056b3; /* Изменение цвета */
+  transform: scale(1.2);
+  color: #0056b3;
 }
 
 .description {
@@ -79,8 +78,8 @@
 }
 
 .description:hover {
-  transform: scale(1.1); /* Увеличение текста */
-  color: #333; /* Изменение цвета текста */
+  transform: scale(1.1);
+  color: #333;
 }
 
 /* Анимация для описания */

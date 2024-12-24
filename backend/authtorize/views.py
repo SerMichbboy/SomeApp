@@ -40,28 +40,28 @@ class CustomTokenObtainPairView(APIView):
             'refresh': str(refresh)
         })
 
+
 class CustomTokenRefreshView(TokenRefreshView):
     def post(self, request, *args, **kwargs):
         # Проверяем, аутентифицирован ли пользователь
         if request.user.is_anonymous:
             return Response(
-                {'detail': 'Authentication credentials were not provided.'},
+                {
+                    'detail': 'Authentication credentials were not provided.'
+                },
                 status=status.HTTP_401_UNAUTHORIZED
             )
 
         response = super().post(request, *args, **kwargs)
 
-        # Обновляем токены в базе данных
         try:
             user_token = UserToken.objects.get(user=request.user)
             user_token.access_token = response.data['access']
             user_token.save()
         except UserToken.DoesNotExist:
-            pass  # Обработка случая, если токен не найден
+            pass
 
         return response
-
-
 
 
 class LogoutView(APIView):
@@ -78,7 +78,6 @@ class LogoutView(APIView):
         except UserToken.DoesNotExist:
             return Response(
                 {'message': 'User not logged in.'},
-                status=401  # Используем 401 вместо 400
+                status=401
             )
-
         

@@ -9,6 +9,9 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 
 class CustomTokenObtainPairView(APIView):
+    """
+        Выдача токена пользователю.
+    """
     permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
@@ -20,7 +23,6 @@ class CustomTokenObtainPairView(APIView):
                 {'detail': 'Invalid username or email.'},
                 status=status.HTTP_400_BAD_REQUEST
             )
-        # Нужно реализовать хранение пароля
         if not user.check_password(password):
             return Response(
                 {'detail': 'Invalid credentials.'},
@@ -42,8 +44,10 @@ class CustomTokenObtainPairView(APIView):
 
 
 class CustomTokenRefreshView(TokenRefreshView):
+    """
+        Обновление токена.
+    """
     def post(self, request, *args, **kwargs):
-        # Проверяем, аутентифицирован ли пользователь
         if request.user.is_anonymous:
             return Response(
                 {
@@ -65,12 +69,15 @@ class CustomTokenRefreshView(TokenRefreshView):
 
 
 class LogoutView(APIView):
+    """
+        Удаление токена.
+    """
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
         try:
             user_token = UserToken.objects.get(user=request.user)
-            user_token.delete()  # Удаляем токены
+            user_token.delete()
             return Response(
                 {'message': 'Logout successful.'},
                 status=200

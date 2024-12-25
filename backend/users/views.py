@@ -15,14 +15,12 @@ class CustomUserViewSet(viewsets.ModelViewSet):
         users = self.get_queryset()
         serializer = self.get_serializer(users, many=True)
         return Response(serializer.data)
-    
-    # Метод для получения пользователя по ID (GET /api/users/<id>/)
+
     def retrieve(self, request, pk=None):
         user = self.get_object()
         serializer = self.get_serializer(user)
         return Response(serializer.data)
 
-    # Метод для создания нового пользователя (POST /api/users/)
     def create(self, request):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
@@ -34,7 +32,6 @@ class CustomUserViewSet(viewsets.ModelViewSet):
             "details": serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
 
-    # Метод для обновления данных пользователя (PUT /api/users/<id>/)
     def update(self, request, pk=None):
         user = self.get_object() 
         serializer = self.get_serializer(user, data=request.data, partial=True)
@@ -43,7 +40,6 @@ class CustomUserViewSet(viewsets.ModelViewSet):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    # Метод для удаления пользователя (DELETE /api/users/<id>/)
     def destroy(self, request, pk=None):
         user = self.get_object()
         user.delete()

@@ -48,7 +48,7 @@ const RegistrationForm = () => {
 
   return (
     <div style={{ maxWidth: "400px", margin: "0 auto", padding: "20px", fontFamily: "Arial, sans-serif" }}>
-      <h1 style={{ textAlign: "center" }}>User Registration</h1>
+      <h1 style={{ textAlign: "center" }}></h1>
       <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
         <label>
           Username:

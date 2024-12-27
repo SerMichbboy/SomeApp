@@ -5,6 +5,7 @@ import UsersListPage from "./pages/UsersListPage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import { AuthProvider } from "./context/AuthContext";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -12,19 +13,21 @@ function App() {
       <Router>
         <div className="App">
           <Routes>
-            {/* Главная страница */}
-            <Route path="/main" element={<HomePage />} />
 
-            {/* Страница со списком пользователей */}
-            <Route path="/users_list" element={<UsersListPage />} />
+            <Route
+              path="/main"
+              element={<PrivateRoute element={HomePage} />}
+            />
 
-            {/* Страница входа */}
+            <Route
+              path="/users_list"
+              element={<PrivateRoute element={UsersListPage} />}
+            />
+
             <Route path="/login_page" element={<LoginPage />} />
 
-            {/* Страница регистрации */}
             <Route path="/register_page" element={<RegisterPage />} />
 
-            {/* Редирект на главную страницу по умолчанию */}
             <Route path="/" element={<Navigate to="/main" />} />
           </Routes>
         </div>

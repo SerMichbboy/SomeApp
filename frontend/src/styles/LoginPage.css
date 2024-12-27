@@ -7,7 +7,6 @@
   height: 100vh;
   background-color: #f4f6f9;
   font-family: 'Arial', sans-serif;
-  position: page;
   padding: 20px;
 }
 
@@ -18,7 +17,6 @@
   color: #333;
   text-align: center;
   animation: fadeIn 2s ease-in-out;
-  z-index: 10;
 }
 
 .app-name {
@@ -39,24 +37,82 @@
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
-  z-index: 10;
 }
 
-.input-field {
+/* Общий стиль для полей ввода */
+.input-field,
+.password-input {
   width: 250px;
   padding: 10px 15px;
   margin: 10px 0;
   border: 1px solid #ddd;
   border-radius: 10px;
   font-size: 16px;
+  box-sizing: border-box;
+  transition: all 0.3s ease; /* Плавный переход для увеличения и подсветки */
 }
 
-.input-field:focus {
+/* Эффекты при фокусировке и вводе */
+.input-field:focus,
+.password-input:focus,
+.input-field:not(:placeholder-shown),
+.password-input:not(:placeholder-shown) {
   outline: none;
   border-color: #007bff;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  transform: scale(1.05); /* Увеличение поля при фокусе и вводе */
 }
 
+/* Контейнер для пароля с кнопкой Show */
+.password-input-container {
+  position: relative;
+  width: 250px;
+  margin: 10px 0;
+}
+
+.password-input {
+  padding-right: 50px;
+}
+
+/* Кнопка "Show" */
+.btn-show {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #007bff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.icon-eye,
+
+.icon-eye-off {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+}
+
+.icon-eye {
+  transform: rotate(0deg);
+}
+
+.icon-eye-off {
+  transform: rotate(450deg);
+}
+
+.btn-show:hover {
+  color: #0056b3;
+}
+
+.btn-show:active {
+  color: #003f7f;
+}
+
+/* Кнопка входа */
 .btn-login {
   padding: 10px 20px;
   margin: 10px 0;
@@ -73,39 +129,8 @@
   background-color: #0056b3;
   transform: scale(1.05);
 }
-
 .btn-login:active {
   transform: scale(1);
-}
-
-/* Анимация для мячиков */
-.animation {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  position: absolute;
-  bottom: 100px;
-  left: 0;
-}
-
-.ball {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #007bff;
-  animation: bounce 2s ease-in-out infinite;
-}
-
-.ball:nth-child(1) {
-  animation-delay: 0s;
-}
-
-.ball:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.ball:nth-child(3) {
-  animation-delay: 0.4s;
 }
 
 /* Анимации */
@@ -117,14 +142,5 @@
   100% {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
   }
 }

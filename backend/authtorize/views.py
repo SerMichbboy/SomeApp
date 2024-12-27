@@ -1,3 +1,5 @@
+import logging
+
 from rest_framework.response import Response
 from rest_framework import status
 from users.models import CustomUser
@@ -69,12 +71,7 @@ class CustomTokenRefreshView(TokenRefreshView):
 
 
 class LogoutView(APIView):
-    """
-        Удаление токена.
-    """
-    permission_classes = [IsAuthenticated]
-
-    def post(self, request):
+    def delete(self, request):
         try:
             user_token = UserToken.objects.get(user=request.user)
             user_token.delete()
@@ -87,4 +84,3 @@ class LogoutView(APIView):
                 {'message': 'User not logged in.'},
                 status=401
             )
-        

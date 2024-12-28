@@ -32,18 +32,23 @@ function HomePage() {
     <div className="home-container">
       <div className="home-header">
         {user ? (
-          <div className="user-info">
-            <strong>{user.username}</strong>
-            <button className="btn-register" onClick={handleLogout}>
-              Logout
-            </button>
-          </div>
+            <div className="user-info">
+              <strong>{user.username}</strong>
+              <Link
+                  to="/main"
+                  className="btn-register"
+                  onClick={handleLogout}
+              >
+                Logout
+              </Link>
+            </div>
+
         ) : (
-          <>
-            <Link to="/register_page" className="btn-register">
-              Зарегистрироваться
-            </Link>
-            <Link to="/login_page" className="btn-register">
+            <>
+              <Link to="/register_page" className="btn-register">
+                Зарегистрироваться
+              </Link>
+              <Link to="/login_page" className="btn-register">
               Войти
             </Link>
           </>
@@ -75,7 +80,7 @@ function HomePage() {
         </p>
       </div>
 
-      <div className="animation">
+      <div className="container">
         <div className="ball"></div>
         <div className="ball"></div>
         <div className="ball"></div>

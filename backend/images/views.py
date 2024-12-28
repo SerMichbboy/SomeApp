@@ -19,8 +19,10 @@ class ImageView(APIView):
     def post(self, request):
         file = request.FILES.get('image')
         if not file:
-            return Response({"error": "No image provided."}, status=status.HTTP_400_BAD_REQUEST)
-        
+            return Response({
+                "error": "No image provided."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
         # Обработка изображения
         image_instance = process_image(file)
         

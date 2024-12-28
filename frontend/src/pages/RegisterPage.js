@@ -28,7 +28,7 @@ function RegisterPage() {
     <div>
       <RegistrationForm />
       <button className="btn-home" onClick={handleGoHome}>
-        Go to Home
+        Home
       </button>
     </div>
   );

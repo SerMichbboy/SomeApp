@@ -72,7 +72,7 @@ const LoginPage = () => {
   return (
     <div className="login-container">
       <button className="btn-home" onClick={handleGoHome} tabIndex={0}>
-        Go to Home
+        Home
       </button>
       <form className="login-form" onSubmit={handleLogin}>
         <input

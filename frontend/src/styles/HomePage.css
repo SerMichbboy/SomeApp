@@ -2,9 +2,6 @@ body, html {
   overflow-x: hidden;
   margin: 0;
 }
-
-
-/* Основной контейнер */
 .home-container {
   display: flex;
   flex-direction: column;
@@ -15,8 +12,6 @@ body, html {
   font-family: 'Arial', sans-serif;
   position: relative;
 }
-
-/* Заголовок и описание */
 .home-header {
   display: flex;
   justify-content: space-between;
@@ -29,7 +24,6 @@ body, html {
   right: 0;
   z-index: 10;
 }
-
 .user-info {
   display: flex;
   padding: 10px 20px;
@@ -37,8 +31,6 @@ body, html {
   gap: 10px;
   font-size: 1rem;
 }
-
-/* Общий стиль для кнопок */
 .btn-register, .btn-logout, .btn-users {
   padding: 10px 20px;
   margin: 10px auto;
@@ -49,8 +41,6 @@ body, html {
   font-size: 16px;
   transition: background-color 0.3s ease;
 }
-
-/* Эффект наведения на кнопки */
 .btn-register:hover, .btn-users:hover, .btn-logout:hover {
   background-color: #0056b3;
 }
@@ -58,7 +48,7 @@ body, html {
 .welcome-text {
   font-size: 3rem;
   font-weight: bold;
-  color: #333;
+  color: #007bff;
   text-align: center;
   user-select: none;
   animation: fadeIn 2s ease-in-out;
@@ -66,7 +56,6 @@ body, html {
 }
 
 .welcome-text:hover {
-  transform: scale(1.1);
   color: #007bff;
 }
 
@@ -82,7 +71,7 @@ body, html {
 
 .description {
   font-size: 1.2rem;
-  color: #555;
+  color: #0056b3;
   text-align: center;
   margin-top: 20px;
   opacity: 0;
@@ -95,7 +84,7 @@ body, html {
 
 .description:hover {
   transform: scale(1.1);
-  color: #333;
+  color: #0056b3;
 }
 
 /* Анимация для описания */
@@ -111,19 +100,22 @@ body, html {
   }
 }
 
-/* Анимация для мячиков */
-.animation {
+.container {
+  position: fixed;
+  bottom: 120px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  justify-content: space-around;
-  width: 100%;
-  position: absolute;
-  bottom: 250px;
-  left: 0;
+  justify-content: space-between;
+  width: 520px;
+  align-items: flex-end;
 }
 
+/* Мячики */
 .ball {
   width: 20px;
   height: 20px;
+  bottom: 20px;
   border-radius: 50%;
   background-color: #007bff;
   animation: bounce 2s ease-in-out infinite;
@@ -139,18 +131,6 @@ body, html {
 
 .ball:nth-child(3) {
   animation-delay: 0.4s;
-}
-
-/* Анимации */
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 @keyframes bounce {

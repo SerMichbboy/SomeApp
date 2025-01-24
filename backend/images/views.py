@@ -5,10 +5,12 @@ from rest_framework.views import APIView
 from images.models import Image
 from .serializers import ImageSerializer
 from django.http import FileResponse
-from .services import process_image 
+from .services import process_image
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
-# from utils.rabbitmq.rabbitmq import send_rabbitmq_message 
+
+
+# from utils.rabbitmq.rabbitmq import send_rabbitmq_message
 
 class ImageView(APIView):
     '''
@@ -25,7 +27,7 @@ class ImageView(APIView):
             )
         # Обработка изображения
         image_instance = process_image(file)
-        
+
         # Сохраняем объект изображения в базе данных
         image_instance_model = Image(
             title=image_instance['title'],
@@ -39,7 +41,7 @@ class ImageView(APIView):
         # send_rabbitmq_message("upload", image_instance_model.id)
 
         return Response(
-            data = ImageSerializer(image_instance_model).data, 
+            data=ImageSerializer(image_instance_model).data,
             status=status.HTTP_201_CREATED
         )
 
@@ -58,7 +60,8 @@ class ImageView(APIView):
                 return Response(status=status.HTTP_404_NOT_FOUND)
 
             response = FileResponse(open(file_path, 'rb'), as_attachment=True)
-            response['Content-Disposition'] = f'attachment; filename="{os.path.basename(file_path)}"'
+            response[
+                'Content-Disposition'] = f'attachment; filename="{os.path.basename(file_path)}"'
             return response
         else:
             images = Image.objects.all()
@@ -80,7 +83,7 @@ class ImageView(APIView):
 
             return Response(serializer.data)
         return Response(
-            serializer.errors, 
+            serializer.errors,
             status=status.HTTP_400_BAD_REQUEST
         )
 

@@ -129,5 +129,3 @@ docker compose up --build
 - api/token/delete/
 
 ---
-
-### RabbitMQ

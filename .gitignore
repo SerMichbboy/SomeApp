@@ -1,3 +1,12 @@
+
+# Игнорировать папки __pycache__
+__pycache__/
+*/__pycache__/
+
+# Игнорировать папки migrations
+migrations/
+*/migrations/
+
 pinkrabbit.py
 frontend/node_modules
 .venv

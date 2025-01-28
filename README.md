@@ -24,7 +24,7 @@
 - PyJWT
 - Postgress
 
-и др. Для большего списка откройе requirements.txt
+и др. Для большего списка откройте requirements.txt
 
 ---
 Для запуска локально нужно в .env раскоментить:
@@ -47,7 +47,7 @@ DATABASE_HOST=db
 
 Для работы с проектом локально выполните команду:
 
-- pip install requirements.txt
+- cd backend/ pip install requirements.txt
 
 команда установит необходимые зависимости на машину.
 

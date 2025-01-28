@@ -1,1 +1,4 @@
 pinkrabbit.py
+frontend/node_modules
+.venv
+.idea

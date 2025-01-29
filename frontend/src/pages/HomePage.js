@@ -79,7 +79,7 @@ function HomePage() {
           We are creating something for you
         </p>
       </div>
-        <img src="/senior.png" alt="Senior" />
+        {/* <img src="/senior.png" alt="Senior" /> */}
       <div className="container">
         <div className="ball"></div>
         <div className="ball"></div>

@@ -39,7 +39,7 @@ DATABASE_HOST=db
 
 ## database
 
-В проекте фигурирует postgres база данных.
+postgres
 
 ---
 
